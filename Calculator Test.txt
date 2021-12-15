@@ -1,0 +1,161 @@
+package TestNG;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Calculator {
+	
+	WebDriver driver;
+	
+	
+	@BeforeTest 
+	public void beforeTest() {
+		System.setProperty("webdriver.chrome.driver", "./Software/chromedriver.exe");
+		driver = new ChromeDriver(); 
+		driver.manage().window().maximize();
+		driver.get("https://www.calculator.net/");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+	}
+	
+	@AfterMethod 
+	public void Back() {
+		driver.findElement(By.xpath("//span[text()='AC']")).click();
+	}
+	
+	
+	//***** To check multiplication operation *****
+	
+	@Test (priority = 0)
+	public void Multiplication() {
+		// To enter N1 value
+		driver.findElement(By.xpath("//span[text()='4']")).click();
+		driver.findElement(By.xpath("//span[text()='2']")).click();
+		driver.findElement(By.xpath("//span[text()='3']")).click();
+		
+		// To Do Multiplication
+		driver.findElement(By.xpath("//span[text()='×']")).click();
+		
+		// To enter N2 value
+		driver.findElement(By.xpath("//span[text()='5']")).click();
+		driver.findElement(By.xpath("//span[text()='2']")).click();
+		driver.findElement(By.xpath("//span[text()='5']")).click();
+		
+		WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
+			System.out.println("Your Multiplication Value is : " + answer.getText());	
+			System.out.println("------------------------------------");	
+			
+		
+		}
+		
+	
+	// ***** To check Division Operation *****
+	
+	@Test(priority = 1)
+	public void Division() {
+		// To enter N1 value
+		driver.findElement(By.xpath("//span[text()='4']")).click();
+		driver.findElement(By.xpath("//span[text()='0']")).click();
+		driver.findElement(By.xpath("//span[text()='0']")).click();
+		driver.findElement(By.xpath("//span[text()='0']")).click(); 
+		
+		// To Do Division 
+		driver.findElement(By.xpath("//span[text()='/']")).click();
+		
+		// To enter N2 value
+		driver.findElement(By.xpath("//span[text()='2']")).click();
+		driver.findElement(By.xpath("//span[text()='0']")).click();
+		driver.findElement(By.xpath("//span[text()='0']")).click();
+		
+		WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
+			System.out.println("Your Division Value is : " + answer.getText());	
+			System.out.println("------------------------------------");	
+	
+			
+	}
+
+	
+	// ***** To check Addition Operation *****
+	
+	@Test(priority = 2)
+	public void Addition() {
+	
+		// To enter N1 value
+		driver.findElement(By.xpath("//span[text()='–']")).click();
+		driver.findElement(By.xpath("//span[text()='2']")).click();
+		driver.findElement(By.xpath("//span[text()='3']")).click();
+		driver.findElement(By.xpath("//span[text()='4']")).click();
+		driver.findElement(By.xpath("//span[text()='2']")).click();
+		driver.findElement(By.xpath("//span[text()='3']")).click();
+		driver.findElement(By.xpath("//span[text()='4']")).click(); 
+		
+		// To Do Addistion 
+		driver.findElement(By.xpath("//span[text()='+']")).click();
+		
+		// To enter N2 value
+		driver.findElement(By.xpath("//span[text()='3']")).click();
+		driver.findElement(By.xpath("//span[text()='4']")).click();
+		driver.findElement(By.xpath("//span[text()='5']")).click();
+		driver.findElement(By.xpath("//span[text()='3']")).click();
+		driver.findElement(By.xpath("//span[text()='4']")).click();
+		driver.findElement(By.xpath("//span[text()='5']")).click();
+
+		
+		WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
+			System.out.println("Your Addition Value is : " + answer.getText());	
+			System.out.println("------------------------------------");	
+
+	}
+
+	
+	// ***** To check Subtraction Operation *****
+	
+	@Test(priority = 3)
+	public void Subtraction() {
+		// To enter N1 value
+				driver.findElement(By.xpath("//span[text()='2']")).click();
+				driver.findElement(By.xpath("//span[text()='3']")).click();
+				driver.findElement(By.xpath("//span[text()='4']")).click();
+				driver.findElement(By.xpath("//span[text()='8']")).click();
+				driver.findElement(By.xpath("//span[text()='2']")).click();
+				driver.findElement(By.xpath("//span[text()='3']")).click(); 
+				
+				// To Do Substraction 
+				driver.findElement(By.xpath("//span[text()='–']")).click();
+				
+				// To enter N2 value
+				driver.findElement(By.xpath("//span[text()='–']")).click();
+				driver.findElement(By.xpath("//span[text()='2']")).click();
+				driver.findElement(By.xpath("//span[text()='3']")).click();
+				driver.findElement(By.xpath("//span[text()='0']")).click();
+				driver.findElement(By.xpath("//span[text()='9']")).click();
+				driver.findElement(By.xpath("//span[text()='4']")).click(); 
+				driver.findElement(By.xpath("//span[text()='8']")).click();
+				driver.findElement(By.xpath("//span[text()='2']")).click();
+				driver.findElement(By.xpath("//span[text()='3']")).click();
+				
+				WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
+					System.out.println("Your Addition Value is : " + answer.getText());	
+					System.out.println("------------------------------------");	
+	}	
+	
+	
+	
+	
+	
+	@AfterTest
+	public void closeTest() {
+		driver.close();
+	}
+	
+	
+
+}
