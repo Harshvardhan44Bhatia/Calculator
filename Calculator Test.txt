@@ -15,7 +15,7 @@ public class Calculator {
 	
 	WebDriver driver;
 	
-	
+	// ***** Run before starting all the methods *****
 	@BeforeTest 
 	public void beforeTest() {
 		System.setProperty("webdriver.chrome.driver", "./Software/chromedriver.exe");
@@ -23,12 +23,6 @@ public class Calculator {
 		driver.manage().window().maximize();
 		driver.get("https://www.calculator.net/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-	}
-	
-	@AfterMethod 
-	public void Back() {
-		driver.findElement(By.xpath("//span[text()='AC']")).click();
 	}
 	
 	
@@ -52,11 +46,9 @@ public class Calculator {
 		WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
 			System.out.println("Your Multiplication Value is : " + answer.getText());	
 			System.out.println("------------------------------------");	
-			
-		
 		}
 		
-	
+		
 	// ***** To check Division Operation *****
 	
 	@Test(priority = 1)
@@ -78,8 +70,6 @@ public class Calculator {
 		WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
 			System.out.println("Your Division Value is : " + answer.getText());	
 			System.out.println("------------------------------------");	
-	
-			
 	}
 
 	
@@ -112,7 +102,6 @@ public class Calculator {
 		WebElement answer = driver.findElement(By.xpath("//div[@id='sciOutPut']"));	
 			System.out.println("Your Addition Value is : " + answer.getText());	
 			System.out.println("------------------------------------");	
-
 	}
 
 	
@@ -149,8 +138,15 @@ public class Calculator {
 	
 	
 	
+	// ***** To run after each Method *****	
+	@AfterMethod 
+	public void Back() {
+		driver.findElement(By.xpath("//span[text()='AC']")).click();
+	}
 	
 	
+	// ***** Run after finishing all the methods *****
+
 	@AfterTest
 	public void closeTest() {
 		driver.close();
